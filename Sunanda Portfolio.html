@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunanda Vankela | AI Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Reset & Base */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;}
+body{background:#f5f7fa;color:#111;line-height:1.6;scroll-behavior:smooth;transition:0.3s;}
+a{text-decoration:none;color:inherit;}
+section{padding:80px 20px;max-width:1000px;margin:auto;opacity:0;transform:translateY(50px);transition:1s;}
+h1,h2,h3{margin-bottom:15px;}
+h1{font-size:3rem;text-align:center;margin-bottom:10px;}
+h2{font-size:2rem;color:#4b6cb7;margin-bottom:20px;text-align:center;}
+p{margin-bottom:15px;font-size:1.05rem;}
+.btn{display:inline-block;margin-top:20px;background-color:#ffd700;color:#111;padding:12px 25px;border-radius:6px;font-weight:500;transition:0.3s;}
+.btn:hover{background-color:#e6c200;transform:scale(1.05);}
+
+/* Header/Hero */
+header{position:relative;overflow:hidden;text-align:center;height:100vh;color:white;}
+header canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;}
+header::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:0;}
+header .content{position:relative;z-index:1;top:40%;}
+header h1{color:#ffd700;}
+header h2{color:white;margin-top:10px;}
+nav{display:flex;justify-content:center;gap:20px;padding:20px;flex-wrap:wrap;}
+nav a{color:#ffd700;font-weight:500;transition:0.3s;}
+nav a:hover{color:#e6c200;}
+
+/* Cards for readability */
+.about-card, .card, .education-card{background:rgba(255,255,255,0.95);padding:20px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+
+/* Education */
+.education-container{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+.education-card{width:250px;transition:0.3s;}
+.education-card:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,0.2);}
+
+/* Skills */
+.skills-container{display:flex;flex-wrap:wrap;justify-content:center;gap:40px;margin-top:20px;}
+.skill-circle{position:relative;width:120px;height:120px;}
+.skill-circle svg{transform:rotate(-90deg);}
+.skill-circle circle{fill:none;stroke-width:10;stroke-linecap:round;}
+.skill-circle .bg{stroke:#e0e0e0;}
+.skill-circle .progress{stroke:#4b6cb7;stroke-dasharray:314;stroke-dashoffset:314;transition:1s;}
+.skill-circle span{position:absolute;width:100%;text-align:center;top:45%;left:0;font-weight:500;font-size:0.9rem;}
+
+/* Experience & Projects */
+.card{margin-bottom:20px;transition:0.3s;}
+.card:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,0.2);}
+.card h3{color:#4b6cb7;margin-bottom:10px;}
+
+/* Certifications */
+.certifications{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;margin-top:10px;}
+.certifications a{background:#4b6cb7;color:white;padding:10px 15px;border-radius:6px;font-weight:500;transition:0.3s;}
+.certifications a:hover{background:#182848;transform:scale(1.05);}
+
+/* Contact */
+.contact-form{max-width:500px;margin:auto;display:flex;flex-direction:column;gap:15px;}
+.contact-form input,.contact-form textarea{padding:12px;border-radius:6px;border:1px solid #ccc;font-size:1rem;}
+.contact-form button{background:#4b6cb7;color:white;padding:12px;border:none;border-radius:6px;font-weight:500;cursor:pointer;transition:0.3s;}
+.contact-form button:hover{background:#182848;transform:scale(1.05);}
+
+/* Dark Mode */
+body.dark-mode{background:#121212;color:#e0e0e0;}
+body.dark-mode h1,h2,h3{color:#ffd700;}
+body.dark-mode p{color:#e0e0e0;}
+body.dark-mode .about-card, body.dark-mode .card, body.dark-mode .education-card{background:rgba(30,30,30,0.9);}
+body.dark-mode .certifications a{background:#333;color:#ffd700;}
+body.dark-mode .contact-form button{background:#333;color:#ffd700;}
+body.dark-mode .skill-circle .progress{stroke:#ffd700;}
+.dark-mode-toggle{position:fixed;top:20px;right:20px;background:#4b6cb7;color:white;padding:10px 15px;border-radius:5px;cursor:pointer;z-index:1000;transition:0.3s;}
+body.dark-mode .dark-mode-toggle{background:#333;color:#ffd700;}
+
+/* Footer */
+footer{text-align:center;padding:30px;background:#4b6cb7;color:white;margin-top:40px;}
+
+/* Animations */
+section.visible{opacity:1;transform:translateY(0);transition:1s;}
+@media(max-width:600px){h1{font-size:2.2rem;} h2{font-size:1.5rem;}}
+</style>
+</head>
+<body>
+
+<div class="dark-mode-toggle" onclick="toggleDarkMode()">🌗 Dark Mode</div>
+
+<!-- Hero Section -->
+<header>
+<canvas id="heroCanvas"></canvas>
+<div class="content">
+    <h1>Sunanda Vankela</h1>
+    <h2>AI Enthusiast | Freelance Innovator | Content Creator | Creative Mind</h2>
+    <a href="https://drive.google.com/file/d/1soGiLAw98Fh6nfvqId9GkxtIWu65fZXm/view?usp=drivesdk" target="_blank" class="btn">Download Resume</a>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</div>
+</header>
+
+<!-- About Me -->
+<section id="about">
+<h2>About Me</h2>
+<div class="about-card">
+<p>I am a B.Tech Computer Science student passionate about Python, AI, ML, and content creation. I work as a freelancer with Outlier AI and RWS Groups on AI projects and research-based content creation at Gudsky Research Foundation. My goal is to contribute impactful AI solutions in technology and research.</p>
+</div>
+</section>
+
+<!-- Education -->
+<section id="education">
+<h2>Education</h2>
+<div class="education-container">
+  <div class="education-card">
+    <h3>B.Tech Computer Science Engineering</h3>
+    <p>Sreenivasa Institute of Technology & Management Studies</p>
+    <p>CGPA: 8.8</p>
+  </div>
+  <div class="education-card">
+    <h3>Intermediate MBiPC</h3>
+    <p>Sairam Junior College</p>
+    <p>Score: 7.56</p>
+  </div>
+  <div class="education-card">
+    <h3>Vocational: Livestock Management & Dairying</h3>
+    <p>Score: 987/1000</p>
+  </div>
+  <div class="education-card">
+    <h3>10th SLVMV High School</h3>
+    <p>Score: 594/600</p>
+  </div>
+</div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+<h2>Top Skills</h2>
+<div class="skills-container">
+<div class="skill-circle">
+<svg width="120" height="120"><circle class="bg" cx="60" cy="60" r="50"></circle><circle class="progress" cx="60" cy="60" r="50"></circle></svg>
+<span>Python</span>
+</div>
+<div class="skill-circle">
+<svg width="120" height="120"><circle class="bg" cx="60" cy="60" r="50"></circle><circle class="progress" cx="60" cy="60" r="50"></circle></svg>
+<span>AI/ML</span>
+</div>
+<div class="skill-circle">
+<svg width="120" height="120"><circle class="bg" cx="60" cy="60" r="50"></circle><circle class="progress" cx="60" cy="60" r="50"></circle></svg>
+<span>Deep Learning</span>
+</div>
+<div class="skill-circle">
+<svg width="120" height="120"><circle class="bg" cx="60" cy="60" r="50"></circle><circle class="progress" cx="60" cy="60" r="50"></circle></svg>
+<span>HTML & CSS</span>
+</div>
+<div class="skill-circle">
+<svg width="120" height="120"><circle class="bg" cx="60" cy="60" r="50"></circle><circle class="progress" cx="60" cy="60" r="50"></circle></svg>
+<span>Content Creator</span>
+</div>
+</div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+<h2>Experience</h2>
+<div class="card">
+<h3>Outlier AI – Freelance</h3>
+<p>Evaluated AI-generated content, reviewed audio/speech datasets, and provided detailed feedback to improve AI/ML model performance. Collaborated with the team to maintain high accuracy and timely delivery.</p>
+</div>
+<div class="card">
+<h3>RWS Groups – Freelance</h3>
+<p><strong>Callisto (Search Quality Rater):</strong> Evaluated search results and analyzed relevance to ensure high-quality user experience.</p>
+<p><strong>Diamond (Content Moderation):</strong> Reviewed and classified content, maintaining quality standards for AI-driven moderation workflows.</p>
+</div>
+<div class="card">
+<h3>Gudsky Research Foundation – AI Content Creator Internship</h3>
+<p>Worked on a 6-month research project, curating AI/ML educational content, supporting research initiatives, and exploring innovative AI applications to produce impactful outputs.</p>
+</div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+<h2>Projects</h2>
+<div class="card">
+<h3>Deforestation Detection & Fire Classification</h3>
+<p>Developed ML-based system to detect and classify forest fires using MODIS satellite imagery, providing actionable insights for environmental management.</p>
+<p><strong>Technologies:</strong> Python | Google Earth Engine | ML | Visualization</p>
+<p><strong>Highlights:</strong> Collected & preprocessed satellite datasets, applied CNNs, built interactive visualization maps, evaluated performance with accuracy, precision, recall & F1-score.</p>
+<a href="https://github.com/Sunanda1928/Fire-classification.git" target="_blank" class="btn">View Project</a>
+</div>
+</section>
+
+<!-- Certifications -->
+<section id="certifications">
+<h2>Certifications</h2>
+<div class="certifications">
+<a href="https://drive.google.com/file/d/16iImsmduH956xWLgZdXOfg-yw6PjQjj9/view?usp=drivesdk" target="_blank">Open Weaver</a>
+<a href="https://drive.google.com/file/d/1lEU65qdYRrHVZyIPXUUrPJ3evru1lEDj/view?usp=drivesdk" target="_blank">edX</a>
+<a href="https://drive.google.com/file/d/15QcTG-6dFtxV7mznGxpXUSRxfGG8DFKQ/view?usp=drivesdk" target="_blank">Edunet Foundation</a>
+<a href="https://drive.google.com/file/d/1REAcVrubO2U92sQA9qc7oJTuTKxwkpki/view?usp=drivesdk" target="_blank">BSNL</a>
+<a href="https://drive.google.com/file/d/1x46qGqfIpe259Eg0NiOMu99UGQhCZbEs/view?usp=drivesdk" target="_blank">NxtWave</a>
+<a href="https://drive.google.com/file/d/1lYoaX_IUdl15Zxf1wx_Qe0yo0l8lio9w/view?usp=drivesdk" target="_blank">Scaler</a>
+<a href="https://drive.google.com/file/d/1XL3SQFtKuhHwji43Cz9FoBL44Jl0lG4K/view?usp=drivesdk" target="_blank">SkillDzire</a>
+</div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+<h2>Stay in Touch</h2>
+<p>If you have any queries or want to collaborate, feel free to contact me:</p>
+<form class="contact-form" action="mailto:sunandavankela@gmail.com" method="post" enctype="text/plain">
+<input type="text" name="Name" placeholder="Your Name" required>
+<input type="email" name="Email" placeholder="Your Email" required>
+<textarea name="Message" placeholder="Your Message" rows="5" required></textarea>
+<button type="submit">Send Message</button>
+</form>
+</section>
+
+<footer>
+&copy; 2025 Sunanda Vankela. All Rights Reserved.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+<script>
+// Dark Mode Toggle
+function toggleDarkMode(){document.body.classList.toggle('dark-mode');}
+
+// Section fade-in
+window.addEventListener('scroll', function(){
+document.querySelectorAll('section').forEach(section => {
+let rect = section.getBoundingClientRect();
+if(rect.top < window.innerHeight - 100){section.classList.add('visible');}
+});
+});
+
+// Skills animation
+const skills = [{selector:0, percent:90},{selector:1, percent:90},{selector:2, percent:85},{selector:3, percent:80},{selector:4, percent:75}];
+function animateSkills() {
+const skillsSection = document.getElementById('skills');
+if(skillsSection.getBoundingClientRect().top < window.innerHeight - 100){
+skills.forEach(skill=>{
+const circle = document.querySelectorAll('.progress')[skill.selector];
+const radius = circle.r.baseVal.value;
+const circumference = 2 * Math.PI * radius;
+const offset = circumference - (skill.percent/100)*circumference;
+circle.style.strokeDashoffset = offset;
+});
+}}
+window.addEventListener('scroll', animateSkills);
+window.addEventListener('load', animateSkills);
+
+// Particles.js
+particlesJS("heroCanvas", {
+"particles":{"number":{"value":80,"density":{"enable":true,"value_area":800}},"color":{"value":"#ffd700"},"shape":{"type":"circle"},"opacity":{"value":0.5,"random":true},"size":{"value":3,"random":true},"line_linked":{"enable":true,"distance":150,"color":"#ffd700","opacity":0.4,"width":1},"move":{"enable":true,"speed":3,"direction":"none","random":true,"straight":false,"out_mode":"out"}},
+"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"repulse"}}},"retina_detect":true
+});
+</script>
+</body>
+</html>
